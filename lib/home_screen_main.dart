@@ -15,19 +15,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    ref.read(weatherProvider).getCurrentWeather().then((value) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => WeatherHomePage()));
+
+    ref.read(weatherProvider).getGeolocatorPosition().then((value) {
+      ref.read(weatherProvider).getCurrentWeather().then((value) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => WeatherHomePage()));
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: CircularProgressIndicator(
-        color: Colors.purple,
-      )),
+      body: Column(
+        children: [
+          Text("get.WEATHER"),
+          Text("City?"),
+        ],
+      ),
     );
   }
 }
